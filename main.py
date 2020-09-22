@@ -1,9 +1,6 @@
 import utils
 
-url = 'https://www.google.com/amp/s/www.nytimes.com/2020/09/19/science/venus-planets-microbes-life.amp.html'
-swiss_url = 'https://www.google.ch/amp/s/www.nytimes.com/2020/09/19/science/venus-planets-microbes-life.amp.html'
-redirect_to = 'https://www.nytimes.com/2020/09/19/science/venus-planets-microbes-life.html'
-
-print(utils.amp_to_normal(url))
-print(utils.amp_to_normal(swiss_url))
-print(utils.amp_to_normal(redirect_to))
+comment_template = "Non-AMP version: {url}\n\
+\n\
+Beep Boop, I'm a bot. If you have any questions, my creator might check my messages.\n\
+By the way, I'm open source. You can find the code here: "
