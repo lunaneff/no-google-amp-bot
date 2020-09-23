@@ -59,6 +59,6 @@ for comment in subreddit.stream.comments():
     try:
         process_comments(comment)
     except Exception as e:
-        print('Error:', e)
+        print('Error:', e, f'Comment: https://reddit.com{comment.permalink}')
 
 print(reddit)
