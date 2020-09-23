@@ -5,7 +5,7 @@ import re
 comment_template = "I found some Google AMP links in your comment. Here are the normal links:\n\n\
 {links}\
 \n\n\
-Beep Boop, I'm a bot. If you have any questions, my creator might check my messages."
+Beep Boop, I'm a bot. If I made an error or if you have any questions, my creator might check my messages."
 link_regex = '\[(.+)\]\((https?:\/\/[\w\d./?=#%+&-]+)\)'
 implicit_link_regex = '(?<!\()https?:\/\/[\w\d./?=#%+&-]+(?!\))'
 
