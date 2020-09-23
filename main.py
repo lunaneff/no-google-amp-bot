@@ -5,11 +5,11 @@ import re
 comment_template = "I found some Google AMP links in your comment. Here are the normal links:\n\n " \
                    "{links}\n\n " \
                    "Beep Boop, I'm a bot. If I made an error or if you have any questions, my " \
-                   "[creator](https://reddit.com/u/6b86b3ac03c167320d93) might check my messages.\n " \
+                   "[creator](https://reddit.com/u/6b86b3ac03c167320d93) might check my messages.  \n " \
                    "[Source Code](https://github.com/laurinneff/no-google-amp-bot) | [Issues](" \
                    "https://github.com/laurinneff/no-google-amp-bot/issues) "
-link_regex = '\[([^\[\]\(\)]+)\]\((https?:\/\/[\w\d./?=#%+&-]+)\)'
-implicit_link_regex = '(?<!\()https?:\/\/[\w\d./?=#%+&-]+(?!\))'
+link_regex = r'\[([^\[\]\(\)]+)\]\((https?:\/\/[\w\d./?=#%+&-]+)\)'
+implicit_link_regex = r'(?<!\()https?:\/\/[\w\d./?=#%+&-]+(?!\))'
 
 reddit = praw.Reddit('anti-amp')
 
@@ -32,7 +32,7 @@ def process_comments(comment):
     links = re.findall(implicit_link_regex, comment.body)
     if links:
         for link in links:
-            fixed = process_link(comment, link, True)  # Implicit links show the URL as text
+            fixed = process_link(link, True)  # Implicit links show the URL as text
             if fixed:
                 fixed_arr.append(fixed)
 
@@ -46,7 +46,7 @@ def process_comments(comment):
         print(f'Reply: https://reddit.com{reply.permalink}')
 
 
-def process_link(comment, link, implicit=False):
+def process_link(link, implicit=False):
     if not implicit:
         text = link[0]
         url = link[1]
@@ -56,7 +56,8 @@ def process_link(comment, link, implicit=False):
     if utils.is_amp(url):
         # print("link:", text, "to", url)
         fixed = utils.amp_to_normal(url)
-        if implicit: text = fixed
+        if implicit:
+            text = fixed
         return "[{text}]({fixed})".format(text=text, fixed=fixed)
 
 
