@@ -6,7 +6,7 @@ comment_template = "I found some Google AMP links in your comment. Here are the 
 {links}\
 \n\n\
 Beep Boop, I'm a bot. If I made an error or if you have any questions, my creator might check my messages."
-link_regex = '\[(.+)\]\((https?:\/\/[\w\d./?=#%+&-]+)\)'
+link_regex = '\[([^\[\]\(\)]+)\]\((https?:\/\/[\w\d./?=#%+&-]+)\)'
 implicit_link_regex = '(?<!\()https?:\/\/[\w\d./?=#%+&-]+(?!\))'
 
 reddit = praw.Reddit('anti-amp')
@@ -38,7 +38,10 @@ def process_comments(comment):
     if fixed_arr:
         out += '\n- '.join(fixed_arr)
         print(f'Comment by {comment.author} with ID {comment.id} (https://reddit.com{comment.permalink})')
-        print(comment_template.format(links=out))
+        reply_body = comment_template.format(links=out)
+        print(reply_body)
+        reply = comment.reply(reply_body)
+        print(f'Reply: https://reddit.com{reply.permalink}')
 
 
 def process_link(comment, link, implicit=False):
