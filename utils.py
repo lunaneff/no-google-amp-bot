@@ -12,8 +12,9 @@ def is_amp(url):
     :returns: bool
     """
     parsed = urlparse(url)
+    tld = get_tld(parsed.hostname, as_object=True, fix_protocol=True, fail_silently=True)
 
-    if get_tld(parsed.hostname, as_object=True, fix_protocol=True, fail_silently=True).domain == 'google' \
+    if tld and tld.domain == 'google' \
             and parsed.path.startswith('/amp/'):
         return True
     return False
