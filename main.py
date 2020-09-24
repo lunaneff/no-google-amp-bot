@@ -1,6 +1,7 @@
 import praw
 import utils
 import re
+import traceback
 
 comment_template = "I found some Google AMP links in your comment. Here are the normal links:\n\n " \
                    "{links}\n\n " \
@@ -26,7 +27,7 @@ def process_comments(comment):
 
     if links:
         for link in links:
-            fixed = process_link(comment, link)
+            fixed = process_link(link)
             if fixed:
                 fixed_arr.append(fixed)
     links = re.findall(implicit_link_regex, comment.body)
@@ -66,5 +67,6 @@ for comment in subreddit.stream.comments():
         process_comments(comment)
     except Exception as e:
         print('Error:', e, f'Comment: https://reddit.com{comment.permalink}')
+        traceback.print_tb(e.__traceback__)
 
 print(reddit)
