@@ -19,9 +19,6 @@ subreddit = reddit.subreddit("all")
 
 def process_comments(comment):
     links = re.findall(link_regex, comment.body)
-    # if not comment.author == '6b86b3ac03c167320d93':
-    # return
-    # print("{user}:\n{body}".format(user=comment.author, body=comment.body))
 
     fixed_arr = []
 
@@ -55,18 +52,16 @@ def process_link(link, implicit=False):
         text = link
         url = link
     if utils.is_amp(url):
-        # print("link:", text, "to", url)
         fixed = utils.amp_to_normal(url)
         if implicit:
             text = fixed
         return "[{text}]({fixed})".format(text=text, fixed=fixed)
 
 
+print("Anti AMP Bot is running!")
 for comment in subreddit.stream.comments():
     try:
         process_comments(comment)
     except Exception as e:
         print('Error:', e, f'Comment: https://reddit.com{comment.permalink}')
         traceback.print_tb(e.__traceback__)
-
-print(reddit)
