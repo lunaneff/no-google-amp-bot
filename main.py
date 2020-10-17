@@ -8,7 +8,13 @@ comment_template = "I found some Google AMP links in your comment. Here are the 
                    "Beep Boop, I'm a bot. If I made an error or if you have any questions, my " \
                    "[creator](https://reddit.com/u/6b86b3ac03c167320d93) might check my messages.  \n " \
                    "[Source Code](https://github.com/laurinneff/no-google-amp-bot) | [Issues](" \
-                   "https://github.com/laurinneff/no-google-amp-bot/issues) "
+                   "https://github.com/laurinneff/no-google-amp-bot/issues) | [FAQ](" \
+                   "https://laurinneff.ch/2020/10/17/nogoogleampbot/) " \
+                   "Why does this bot exist?  \n" \
+                   "Google does a lot of tracking, which many people don't want, so they use alternatives to their " \
+                   "services. Using AMP, they can track you even more, and they might even replace ads with their " \
+                   "own, stealing ad revenue from the site's owners. Since there's no consistent way of finding the " \
+                   "original links from an AMP link, I made this bot which automatically does it for you. "
 link_regex = r'\[([^\[\]\(\)]+)\]\((https?:\/\/[\w\d./?=#%+&-]+)\)'
 implicit_link_regex = r'(?<!\()https?:\/\/[\w\d./?=#%+&-]+(?!\))'
 
