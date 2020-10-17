@@ -18,6 +18,10 @@ subreddit = reddit.subreddit("all")
 
 
 def process_comments(comment):
+    # Shouldn't reply to own comments, since these links are already fixed
+    if comment.author == reddit.user.me().name:
+        return
+
     links = re.findall(link_regex, comment.body)
 
     fixed_arr = []
