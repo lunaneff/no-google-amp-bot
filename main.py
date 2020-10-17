@@ -6,7 +6,7 @@ import traceback
 comment_template = "I found some Google AMP links in your comment. Here are the normal links:\n\n " \
                    "{links}\n\n " \
                    "Beep Boop, I'm a bot. If I made an error or if you have any questions, my " \
-                   "[creator](https://reddit.com/u/6b86b3ac03c167320d93) might check my messages.  \n " \
+                   "[creator](https://np.reddit.com/u/6b86b3ac03c167320d93) might check my messages.  \n " \
                    "[Source Code](https://github.com/laurinneff/no-google-amp-bot) | [Issues](" \
                    "https://github.com/laurinneff/no-google-amp-bot/issues) | [FAQ](" \
                    "https://laurinneff.ch/2020/10/17/nogoogleampbot/)  \n" \
