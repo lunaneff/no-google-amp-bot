@@ -63,6 +63,9 @@ def process_link(link, implicit=False):
         url = link
     if utils.is_amp(url):
         fixed = utils.amp_to_normal(url)
+        # Sometimes, amp_to_normal returns Google redirects (https://www.google.com/url?q=...)
+        if utils.is_google_redirect(fixed):
+            fixed = utils.follow_google_redirect(fixed)
         if implicit:
             text = fixed
         return "[{text}]({fixed})".format(text=text, fixed=fixed)
