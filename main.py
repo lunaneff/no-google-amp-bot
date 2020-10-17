@@ -9,7 +9,7 @@ comment_template = "I found some Google AMP links in your comment. Here are the 
                    "[creator](https://reddit.com/u/6b86b3ac03c167320d93) might check my messages.  \n " \
                    "[Source Code](https://github.com/laurinneff/no-google-amp-bot) | [Issues](" \
                    "https://github.com/laurinneff/no-google-amp-bot/issues) | [FAQ](" \
-                   "https://laurinneff.ch/2020/10/17/nogoogleampbot/) " \
+                   "https://laurinneff.ch/2020/10/17/nogoogleampbot/)  \n" \
                    "Why does this bot exist?  \n" \
                    "Google does a lot of tracking, which many people don't want, so they use alternatives to their " \
                    "services. Using AMP, they can track you even more, and they might even replace ads with their " \
