@@ -3,18 +3,16 @@ import utils
 import re
 import traceback
 
-comment_template = "I found some Google AMP links in your comment. Here are the normal links:\n\n " \
-                   "{links}\n\n " \
-                   "Beep Boop, I'm a bot. If I made an error or if you have any questions, my " \
-                   "[creator](https://np.reddit.com/u/6b86b3ac03c167320d93) might check my messages.  \n " \
-                   "[Source Code](https://github.com/laurinneff/no-google-amp-bot) | [Issues](" \
-                   "https://github.com/laurinneff/no-google-amp-bot/issues) | [FAQ](" \
-                   "https://laurinneff.ch/2020/10/17/nogoogleampbot/)  \n" \
-                   "Why does this bot exist?  \n" \
-                   "Google does a lot of tracking, which many people don't want, so they use alternatives to their " \
-                   "services. Using AMP, they can track you even more, and they might even replace ads with their " \
-                   "own, stealing ad revenue from the site's owners. Since there's no consistent way of finding the " \
-                   "original links from an AMP link, I made this bot which automatically does it for you. "
+comment_template_single = "Non-AMP Link: {links}\n\n" \
+                          "I'm a bot. [Why?](https://reddit.com/user/NoGoogleAMPBot/comments/lbz2sg/faq/) " \
+                          "| [Code](https://github.com/laurinneff/no-google-amp-bot) " \
+                          "| [Report issues](https://github.com/laurinneff/no-google-amp-bot/issues)"
+comment_template_multi = "Non-AMP Links:\n\n" \
+                         "{links}\n\n" \
+                         "I'm a bot. [Why?](https://reddit.com/user/NoGoogleAMPBot/comments/lbz2sg/faq/) " \
+                         "| [Code](https://github.com/laurinneff/no-google-amp-bot) " \
+                         "| [Report issues](https://github.com/laurinneff/no-google-amp-bot/issues)"
+
 link_regex = r'\[([^\[\]\(\)]+)\]\((https?:\/\/[\w\d./?=#%+&-]+)\)'
 implicit_link_regex = r'(?<!\()https?:\/\/[\w\d./?=#%+&-]+(?!\))'
 
@@ -44,11 +42,11 @@ def process_comments(comment):
             if fixed:
                 fixed_arr.append(fixed)
 
-    out = '- '
+    out = '- ' if len(fixed_arr) > 1 else ""
     if fixed_arr:
-        out += '\n- '.join(fixed_arr)
+        out += '\n- '.join(fixed_arr) if len(fixed_arr) > 1 else fixed_arr[0]
         print(f'Comment by {comment.author} with ID {comment.id} (https://reddit.com{comment.permalink})')
-        reply_body = comment_template.format(links=out)
+        reply_body = comment_template_multi.format(links=out) if len(fixed_arr) > 1 else comment_template_single.format(links=out)
         print(reply_body)
         reply = comment.reply(reply_body)
         print(f'Reply: https://reddit.com{reply.permalink}')
