@@ -60,9 +60,12 @@ def follow_google_redirect(url):
     :param url: The URL to check
     :type url: string
     :return: Returns the real link if it's a redirect. Otherwise, it returns None
-    :returns: string?
+    :returns: string
     """
     if is_google_redirect(url):
         parsed = parse_qs(urlparse(url).query)
-        return parsed.get('q')
+        q = parsed.get('q')
+        if isinstance(q, list):
+            return q[0]
+        return q
     return None
