@@ -4,12 +4,12 @@ import re
 import traceback
 
 comment_template_single = "Non-AMP Link: {links}\n\n" \
-                          "I'm a bot. [Why?](https://reddit.com/user/NoGoogleAMPBot/comments/lbz2sg/faq/) " \
+                          "I'm a bot. [Why?](https://np.reddit.com/user/NoGoogleAMPBot/comments/lbz2sg/faq/) " \
                           "| [Code](https://github.com/laurinneff/no-google-amp-bot) " \
                           "| [Report issues](https://github.com/laurinneff/no-google-amp-bot/issues)"
 comment_template_multi = "Non-AMP Links:\n\n" \
                          "{links}\n\n" \
-                         "I'm a bot. [Why?](https://reddit.com/user/NoGoogleAMPBot/comments/lbz2sg/faq/) " \
+                         "I'm a bot. [Why?](https://np.reddit.com/user/NoGoogleAMPBot/comments/lbz2sg/faq/) " \
                          "| [Code](https://github.com/laurinneff/no-google-amp-bot) " \
                          "| [Report issues](https://github.com/laurinneff/no-google-amp-bot/issues)"
 
