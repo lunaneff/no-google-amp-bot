@@ -8,8 +8,8 @@ def is_amp(url):
     Check if the given URL is an AMP URL
     :param url: The URL to check
     :type url: string
-    :return: Returns a boolean if it's an AMP URL
-    :returns: bool
+    :returns: Returns a boolean if it's an AMP URL
+    :rtype: bool
     """
     parsed = urlparse(url)
     tld = get_tld(parsed.hostname, as_object=True, fix_protocol=True, fail_silently=True)
@@ -26,8 +26,8 @@ def amp_to_normal(url):
 
     :param url: The URL to check
     :type url: string
-    :return: Returns the non-AMP version of the given URL if it's an AMP URL. Otherwise, it returns None
-    :returns: string?
+    :returns: Returns the non-AMP version of the given URL if it's an AMP URL. Otherwise, it returns None
+    :rtype: str or None
     """
     if is_amp(url):
         r = requests.get(url)
@@ -41,8 +41,8 @@ def is_google_redirect(url):
     Check if the given URL is a Google redirect (https://www.google.com/url?q=...)
     :param url: The URL to check
     :type url: string
-    :return: Returns a boolean if it's a redirect
-    :returns: bool
+    :returns: Returns a boolean if it's a redirect
+    :rtype: bool
     """
     parsed = urlparse(url)
     tld = get_tld(parsed.hostname, as_object=True, fix_protocol=True, fail_silently=True)
@@ -59,8 +59,8 @@ def follow_google_redirect(url):
     parameter to find the real link
     :param url: The URL to check
     :type url: string
-    :return: Returns the real link if it's a redirect. Otherwise, it returns None
-    :returns: string
+    :returns: Returns the real link if it's a redirect. Otherwise, it returns None
+    :rtype: str or None
     """
     if is_google_redirect(url):
         parsed = parse_qs(urlparse(url).query)
