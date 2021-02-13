@@ -13,8 +13,8 @@ comment_template_multi = "Non-AMP Links:\n\n" \
                          "| [Code](https://github.com/laurinneff/no-google-amp-bot) " \
                          "| [Report issues](https://github.com/laurinneff/no-google-amp-bot/issues)"
 
-link_regex = r'\[([^\[\]\(\)]+)\]\((https?:\/\/[\w\d./?=#%+&-\']+)\)'
-implicit_link_regex = r'(?<!\()https?:\/\/[\w\d./?=#%+&-\']+(?!\))'
+link_regex = r'\[([^\[\]\(\)]+)\]\((https?:\/\/[\w\d./?=#%+&-]+)\)'
+implicit_link_regex = r'(?<!\()https?:\/\/[\w\d./?=#%+&-]+(?!\))'
 
 reddit = praw.Reddit('anti-amp')
 
