@@ -14,11 +14,23 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create list of Docker tags
+        id: docker_tags
+        shell: bash
+        run: |
+          GIT_BRANCH=${GITHUB_REF#refs/heads/}
+          GIT_SHA_SHORT=$(git rev-parse --short HEAD)
+          TAGS=${GIT_BRANCH},${GIT_BRANCH}.${GIT_SHA_SHORT}
+          if [ ${GIT_BRANCH} = master ]
+            TAGS=${TAGS},latest
+          fi
+
+          echo "::set-output name=docker_tags::${TAGS}"
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/reddit-no-google-amp-bot:latest
+          tags: ghcr.io/${{ github.repository_owner }}/reddit-no-google-amp-bot:${{ steps.docker_tags.outputs.docker_tags }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
