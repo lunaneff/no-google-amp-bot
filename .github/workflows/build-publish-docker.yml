@@ -1,6 +1,9 @@
 name: Build and publish a Docker image on GHCR
 
-on: [ push ]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   docker:
@@ -14,25 +17,11 @@ jobs:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Create list of Docker tags
-        id: docker_tags
-        shell: bash
-        run: |
-          DOCKER_IMAGE=ghcr.io/${{ github.repository_owner }}/reddit-no-google-amp-bot
-          GIT_BRANCH=${GITHUB_REF#refs/heads/}
-          GIT_SHA_SHORT=${GITHUB_SHA::8}
-          TAGS=${DOCKER_IMAGE}:$(echo -n ${GIT_BRANCH} | tr -cs 'a-zA-Z0-9._-' -),${DOCKER_IMAGE}:$(echo -n ${GIT_BRANCH}.${GIT_SHA_SHORT} | tr -cs 'a-zA-Z0-9._-' -)
-          if [ ${GIT_BRANCH} = master ]
-          then
-            TAGS=${TAGS},${DOCKER_IMAGE}:latest
-          fi
-
-          echo "::set-output name=docker_tags::${TAGS}"
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ steps.docker_tags.outputs.docker_tags }}
+          tags: ghcr.io/${{ github.repository_owner }}/reddit-no-google-amp-bot:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
