@@ -27,6 +27,8 @@ jobs:
             TAGS=${TAGS},${DOCKER_IMAGE}:latest
           fi
 
+          TAGS=$(echo $TAGS | tr -cs 'a-zA-Z0-9.,_-' -) # Replace all illegal characters with a hyphen
+
           echo "::set-output name=docker_tags::${TAGS}"
       - name: Build and push
         id: docker_build
