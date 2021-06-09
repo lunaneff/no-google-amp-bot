@@ -19,6 +19,6 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: ${{ github.repository_owner }}/reddit-no-google-amp-bot:linux
+          tags: ghcr.io/${{ github.repository_owner }}/reddit-no-google-amp-bot:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
