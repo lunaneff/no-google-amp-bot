@@ -22,6 +22,7 @@ jobs:
           GIT_SHA_SHORT=${GITHUB_SHA::8}
           TAGS=${GIT_BRANCH},${GIT_BRANCH}.${GIT_SHA_SHORT}
           if [ ${GIT_BRANCH} = master ]
+          then
             TAGS=${TAGS},latest
           fi
 
